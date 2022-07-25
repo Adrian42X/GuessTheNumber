@@ -11,28 +11,36 @@ namespace GuessTheNumber
         static void Main(string[] args)
         {
             Random random = new Random();
-            int NumberToGuess = random.Next(1, 100);
+            int NumberToGuess = random.Next(0, 101);
             Console.WriteLine("GuessTheNumber the number !");
             string nr;
             int MyNumber;
             do
             {   
                 nr = Console.ReadLine();
-                MyNumber = int.Parse(nr);
+                while(!int.TryParse(nr, out MyNumber))
+                {
+                    Console.WriteLine("Invalid Input, try again: ");
+                    nr = Console.ReadLine();
+                }
 
                 if(MyNumber>NumberToGuess)
                 {
-                    Console.WriteLine("Number too big\n Try again \n");
+                    Console.WriteLine("Number too big");
+                    Console.WriteLine("Try again");
                 }else
                     if(MyNumber<NumberToGuess)
                 {
-                    Console.WriteLine("Number too small\n Try again \n");
+                    Console.WriteLine("Number too small");
+                    Console.WriteLine(" Try again ");
                 }
 
             } while (MyNumber != NumberToGuess);
 
-            Console.WriteLine("Your number is correct \n Well done ! :)");
-           
+            Console.WriteLine("Your number is correct");
+            Console.WriteLine("Well done ! :)");
+
+
         }
     }
 }
